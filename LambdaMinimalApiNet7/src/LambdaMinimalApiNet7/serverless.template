@@ -16,7 +16,8 @@
         "Environment" : {
           "Variables" : {
             "AWS_LAMBDA_HANDLER_LOG_LEVEL" : "Debug",
-            "LAMBDA_NET_SERIALIZER_DEBUG" : true
+            "LAMBDA_NET_SERIALIZER_DEBUG" : true,
+            "LAMBDA_RUNTIMESUPPORT_DEBUG" : true
           }
         },
         "Role": null,

@@ -22,9 +22,9 @@
       },
       "Amazon.Lambda.RuntimeSupport": {
         "type": "Direct",
-        "requested": "[1.8.7, )",
-        "resolved": "1.8.7",
-        "contentHash": "aDYTMG4fXfBmm1tl0Lq2p6LtMY7io4dfWD18wI1A2qssYcCM0mSPk1XkpmbOerBoOZIOduqF9r0RTxftl+WIqg==",
+        "requested": "[1.8.8, )",
+        "resolved": "1.8.8",
+        "contentHash": "NOaOTDteAUGwSlCAfzn2GA7y3x49Jg2IutKZGyn+4MMvtNGTm6K3MCYFfXDgZ0n1nFvNz9hmNZiEGOkPz/xPYg==",
         "dependencies": {
           "Amazon.Lambda.Core": "2.1.0"
         }
