@@ -1,0 +1,59 @@
+name: Build & Deploy Lambda
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+defaults:
+  run:
+    working-directory: ./LambdaMinimalApiNet7/src/LambdaMinimalApiNet7
+jobs:
+  ubuntu-latest:
+    name: ubuntu-latest
+    runs-on: ubuntu-latest
+    environment: Test
+    env:
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup .Net
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+          cache: true
+          cache-dependency-path: ./LambdaMinimalApiNet7/src/LambdaMinimalApiNet7/packages.lock.json
+      - name: layer cache
+        uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+      - name:  Install Amazon.Lambda.Tools
+        run: dotnet tool install -g Amazon.Lambda.Tools
+      - name: DotNet Restore
+        run: dotnet restore --locked-mode
+      - name: Package Lambda
+        run: |
+          dotnet lambda package \
+            -ucfb True \
+            -o ./LambdaMinimalApiNet7.zip \
+          
+      - name: Deploy Stack/Lambda
+        run: |
+          dotnet lambda deploy-serverless \
+            --disable-interactive True \
+            --aws-access-key-id $AWS_ACCESS_KEY_ID \
+            --aws-secret-key $AWS_SECRET_ACCESS_KEY \
+            --region $REGION \
+            -pac ./LambdaMinimalApiNet7.zip \
+            -sb $BUCKET \
+            -sn $STACK \
+          
+        env:
+          REGION: ${{ vars.REGION }}
+          BUCKET: ${{ vars.BUCKET }}
+          STACK: ${{ vars.STACK }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
