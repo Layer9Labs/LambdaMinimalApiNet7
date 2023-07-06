@@ -10,13 +10,13 @@ builder.Services.AddControllers();
 
 //builder.Logging.AddLambdaLogger();
 builder.Services
-    .Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
-    {
-        options.SerializerOptions.AddContext<LambdaFunctionJsonSerializerContext>();
-        options.SerializerOptions.PropertyNameCaseInsensitive = false;
-        options.SerializerOptions.PropertyNamingPolicy = null;
-        options.SerializerOptions.WriteIndented = true;
-    })
+    // .Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+    // {
+    //     options.SerializerOptions.AddContext<LambdaFunctionJsonSerializerContext>();
+    //     options.SerializerOptions.PropertyNameCaseInsensitive = false;
+    //     options.SerializerOptions.PropertyNamingPolicy = null;
+    //     options.SerializerOptions.WriteIndented = true;
+    // })
     // .AddHttpLogging(logging =>
     // {
     // })
