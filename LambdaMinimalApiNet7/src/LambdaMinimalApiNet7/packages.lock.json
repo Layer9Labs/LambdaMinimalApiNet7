@@ -1,7 +1,7 @@
 {
   "version": 1,
   "dependencies": {
-    "net7.0": {
+    "net8.0": {
       "Amazon.Lambda.AspNetCoreServer.Hosting": {
         "type": "Direct",
         "requested": "[1.6.0, )",
